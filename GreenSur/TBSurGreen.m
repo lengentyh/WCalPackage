@@ -192,6 +192,7 @@ SSx0 = zeros(length(ef),nks);
 SSy0 = zeros(length(ef),nks);
 SSz0 = zeros(length(ef),nks);
 II  = eye(g_norb,g_norb);
+nH_tt = 0; % to debug parallel computation while isPot==0
 
 tic
 for mm=1:length(ef)

@@ -2,7 +2,8 @@
 This program can calculate the surface states on a semi-inifite thin film by using the Green's function method. 
 
 ## Getting Started 
-From the step in "STBHmftn", you will know that the maximum hopping distace for the (001) surface is 7. Thus you should consturct the finite slab model with 7x2 = 14 layers. (for the reason please referring to the method paper)
+From the step in "STBHmftn", you will know that the maximum hopping distace along the (001) surface is 7. Thus you should consturct the finite slab model with 7x2 = 14 layers. 
+(for the reason please referring to the method paper: the key concept is block diagonalization along the plane normal)
 1) Prepare the input file (input.txt) for the program "GreenSur.m". 
 ```
 GreenSur
@@ -26,6 +27,10 @@ wcal.PeV    = 0.1                     % the onsite energy added on the extra lay
 wcal.dis    = 0.86                    % to specify how many atom layers to be modified 
 
 endGreenSur
+```
+1.5) Adapt orbitals for surface PDOS 
+```
+'PCD_orb' at line 80 in GreenSur.m
 ```
 2) Run "GreenSur.m" to get the Ek dispersion of the semi-infinite thin film with (hkl) surface
 ```

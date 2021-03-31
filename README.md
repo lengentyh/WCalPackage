@@ -25,6 +25,3 @@ A sub-program to calculate unfolding band structure
 ## WilsonLoop
 
 New information
-
-## This is an Educational test
-test

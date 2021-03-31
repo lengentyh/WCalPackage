@@ -14,7 +14,8 @@ wcal.file   = ftn58sparse_cut_p.mat   % Input TB model
 endSuperCell
 ```
 1.5) adapt 'nbound' to max length of wcal.vec
-
+```
+```
 2) Run "SuperCell.m" to get the necessary infomation to construct the supercell TB model from the original TB model
 ```
 >> SuperCell.m

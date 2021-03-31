@@ -25,5 +25,8 @@ A sub-program to calculate unfolding band structure
 ## WilsonLoop
 
 New information
+<<<<<<< HEAD
 
 ##
+=======
+>>>>>>> b1fe8ebca33b3e85616fd2709909cc107d795bfb

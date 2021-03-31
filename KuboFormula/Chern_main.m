@@ -106,6 +106,7 @@ if Ktype==1
     Volume  = norm(cross(T(1,:),T(2,:))); % for 2D
     Dens    = 2*pi/Volume/nks; 
     % Since /sigma_xy = (e^2/h)*(1/2*pi)*k-space-integral, dkx*dky = (2*pi)^2 / volume
+    % B.Anderi Bernevig, Taylor L. Hughes. Topological Insulators and Topological Superconductors, eq.(3.1)
     %Ainv     = 1/norm(cross(BR(1,:),BR(2,:)));
     %Dens     = 2*pi*Ainv/N1/N2;    
     COF      = Dens*cquantum;             % integral measure of the BZ with the unit (e^2/h)

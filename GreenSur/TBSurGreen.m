@@ -76,6 +76,14 @@ ij      = Sftn58sparse.ij;
 dd      = Sftn58sparse.dd(:,1:2);
 tt      = Sftn58sparse.tt;
 
+%--- Choose the PDOS orbitals (OPTIONAL) --- %
+PCD_orb        = 1:norb;
+%PCD_orb = [20,21,26,27,38,39,44,45,56,57,62,63];
+v              = ones(length(PCD_orb),1);
+PCD_exp_sparse = sparse(PCD_orb,PCD_orb,v,norb/2,norb/2);
+PCD_exp        = full(PCD_exp_sparse);
+
+
 if (isSO)
     Lnorb = g_norb/2;
     upL2  = [Lnorb+1:2*Lnorb];
@@ -221,12 +229,12 @@ for mm=1:length(ef)
         [Hs,Hb] = renormH(E,H,T,Ni);
         Gb      = inv(E-Hb);
 		Gs      = inv(E-Hs);
-        Abt(ik) = -imag(trace(Gb));
-        Ast(ik) = -imag(trace(Gs));
+        Abt(ik) = -imag(trace(Gb*PCD_exp));
+        Ast(ik) = -imag(trace(Gs*PCD_exp));
         
-        Sxt(ik) = -imag(trace(Sx*Gs));
-        Syt(ik) = -imag(trace(Sy*Gs));
-        Szt(ik) = -imag(trace(Sz*Gs));
+        Sxt(ik) = -imag(trace(Sx*Gs*PCD_exp));
+        Syt(ik) = -imag(trace(Sy*Gs*PCD_exp));
+        Szt(ik) = -imag(trace(Sz*Gs*PCD_exp));
         
         if isPot==1
             nH       = full(sparse(ii_b,jj_b,exp(1i*dd_b*kcolumnvec).*nH_tt,g_norb,g_norb)); 
@@ -247,6 +255,7 @@ for mm=1:length(ef)
     SSz(mm,:) = Szt;
     
     if isPot==1
+    if isPot==1
         A00(mm,:) = A00t;
         SSx0(mm,:) = Sxt0;
         SSy0(mm,:) = Syt0;
@@ -255,6 +264,14 @@ for mm=1:length(ef)
 end
 save('Ek.mat','As','Ab','A00','SSx','SSy','SSz','SSx0','SSy0','SSz0','KK','EE','ef','Ef','-v7.3') 
 toc
+% As   : spectrum weight of surface Hamiltonian
+% Ab   : spectrum weight of bulk Hamiltonian
+% A00  : spectrum weight of residual Hamiltonian
+% SSx  : surface spin techture ... etc.
+% SSx0 : residual
+% KK   : 1D k-mesh               <- k-mesh intervals correspond to chemical potential interval
+% EE   : chemical potential mesh <- chemical potential intervals correspond to k-mesh interval
+% ef   : chemical potential intervals
  
 poolobj = gcp('nocreate');
 delete(poolobj);

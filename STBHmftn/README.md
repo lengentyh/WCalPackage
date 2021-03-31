@@ -9,11 +9,14 @@ SlabCell
 wcal.nL     = 40                     % number of layers stacking along [hkl]
 wcal.isCut  = 0                      % isCut = 1 to prepare the desired termination for the finite slab
 wcal.LB     = [-0.1 0.5]             % if isCut = 1, LB is for the lower and upper boundaries. 
-wcal.hkl    = [0 0 1]                % (hkl)
+wcal.hkl    = [0 0 1]                % (hkl) in Cartesian representation
 wcal.isConv = 0                      % For the case when the conventional unit vectors do not coincde with the Cartesian xyz
 wcal.ref    = ftn58sparse_SnTe.mat   % name for the bulk TB model
 
 endSlabCell
+```
+1.5) Adapt 'nbound' to max length of wcal.vec, and 'isCAR' in SlabCell.m
+```
 ```
 2) Run "SlabCell.m" to get the necessary infomation to construct the slab TB model from the bulk TB model
 ```

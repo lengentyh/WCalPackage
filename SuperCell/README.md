@@ -13,7 +13,6 @@ wcal.file   = ftn58sparse_cut_p.mat   % Input TB model
 
 endSuperCell
 ```
-```
 1.5) adapt 'nbound' to max length of wcal.vec
 ```
 ```

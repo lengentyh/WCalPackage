@@ -96,7 +96,6 @@ return
 %% --- QSHE at various energies --- %%%
 load Berry.mat
 cquantum = 1; % the unit becomes (e^2/hbar)  
-% since dkx*dky will provide 2pi^2 in the denominator ... Dens ... etc.
 kB       = 8.6173324E-5;
 BR       = ftn58sparse.BR;
 abc      = ftn58sparse.abc;

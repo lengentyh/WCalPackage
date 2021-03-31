@@ -17,6 +17,10 @@
 %%% ---------------------------------------------------------------- %%%
 function SlabCell()
 
+%% Check that [h k l] is in CARTESIAN representation (1) or in TRANSLATION representation (0)
+%% (Added by YiChun 03/18/21)
+isCAR = 0;
+
 %% --- Input Arguments --- %%
 wcal = ReadInput('input.txt');
 nlayer    = wcal.nL;
@@ -86,14 +90,21 @@ if wcal.isConv
 end
 %%% ----------------------------------------------------------------- %%%
 
-abc2xyz   = inv(xyz2abc);%abc2xyz = bulkbasis
+% if [h k l] is in Cartesian representation => express translation in cartesian => basis_index
+% else                                      => just express in translation      => basis_index
+if isCAR == 1
+	abc2xyz   = inv(xyz2abc);%abc2xyz = bulkbasis
+else
+	abc2xyz   = eye(3);
+end
 xyzvector = xyz2abc * bulkbasis; % to conventional cell (xyz2abc*abc2xyz) 
 
-direction_index  = [plane_h, plane_k, plane_l];
+
+direction_index  = [plane_h, plane_k, plane_l]; % in Cartesian representation
 direction_vector = plane_h * xyzvector(1,:) + plane_k * xyzvector(2,:) + plane_l * xyzvector(3,:);
 
 % Construct a vector grid to search new unit cell (orthorhombic !?) 
-nbound    = 2;
+nbound    = 2; % range for searching the new basis
 neighbor1 = [];
 neighbor2 = [];
 for ll = -nbound:nbound
@@ -103,6 +114,7 @@ for ll = -nbound:nbound
             basis_index  = ll * abc2xyz(1,:) + mm * abc2xyz(2,:) + nn * abc2xyz(3,:); % ll*a+mm*b+nn*c 
             basis_vector = ll * vectora + mm * vectorb + nn * vectorc; % a,b,c in cart
             
+	    % find the translation that is othogonal to the [h k l] => basis of the (h k l) plane ... etc.
             if((abs(dot(basis_index, direction_index))<=0.001)&&((abs(ll)>0)||(abs(mm)>0)||(abs(nn)>0)))
                 neighbor1 = [neighbor1; ll, mm, nn, basis_vector, norm(basis_vector)];
             end
@@ -116,6 +128,10 @@ end
 
 [~, ii] = min(neighbor1(1:end, 7));
 basis1  = neighbor1(ii, 4:6); %%% first basis vector
+
+%disp(neighbor1)
+%disp(ii)
+%disp(basis1)
 
 for ii=1:size(neighbor1, 1)
     theta = acos(basis1 * neighbor1(ii, 4:6)'/norm(basis1)/norm(neighbor1(ii, 4:6)));
@@ -201,6 +217,7 @@ for ii=1:size(ps1, 1)
 end
 
 Aplot('Unit Cell',atomps(:,6:8)*[abc(1) 0 0;0 abc(2) 0;0 0 abc(3)]');     
+% Aplot('Unit Cell',atomps(:,9:11)*[abc(1) 0 0;0 abc(2) 0;0 0 abc(3)]');
 
 %%%--- Cut slab structure
 %%%--- superatoms has the same format as the atomps

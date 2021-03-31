@@ -95,7 +95,7 @@ toc
 return
 %% --- QSHE at various energies --- %%%
 load Berry.mat
-cquantum = 1; % the unit becomes (e^2/hbar)  
+cquantum = 1; % the unit becomes (e^2/h)  
 kB       = 8.6173324E-5;
 BR       = ftn58sparse.BR;
 abc      = ftn58sparse.abc;
@@ -105,9 +105,10 @@ if Ktype==1
     %Volume  = abs(T(3,:)*cross(T(1,:),T(2,:))'); % for 3D
     Volume  = norm(cross(T(1,:),T(2,:))); % for 2D
     Dens    = 2*pi/Volume/nks; 
+    % Since /sigma_xy = (e^2/h)*(1/2*pi)*k-space-integral, dkx*dky = (2*pi)^2 / volume
     %Ainv     = 1/norm(cross(BR(1,:),BR(2,:)));
     %Dens     = 2*pi*Ainv/N1/N2;    
-    COF      = Dens*cquantum;             % integral measure of the BZ with the unit (e^2/hbar)
+    COF      = Dens*cquantum;             % integral measure of the BZ with the unit (e^2/h)
     mu       = linspace(Emu(1),Emu(2),nE);    % chemical potnetial
     Berry_ss = zeros(size(mu,2),9);           % Berry phase of each direction as function of energy
 %     LM_ss    = zeros(size(mu,2),3); 

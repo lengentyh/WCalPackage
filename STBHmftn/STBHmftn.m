@@ -13,6 +13,7 @@
 %%% ---------------------------------------------------------------- %%%
 % clear all
 function STBHmftn()
+% PICK OUT desired hoppings
 wcal = ReadInput('input.txt');
 
 %%% Input this manually %%%

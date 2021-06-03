@@ -154,4 +154,4 @@ Sftn58sparse.ij      = ijs;
 Sftn58sparse.tt      = tts;
 Sftn58sparse.dd      = dds(:,1:2);
 
-save Sftn58sparse.mat Sftn58sparse
+save Sftn58sparse.mat Sftn58sparse -v7.3

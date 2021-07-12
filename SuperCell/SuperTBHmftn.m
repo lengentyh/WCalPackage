@@ -25,6 +25,7 @@ elseif isfield(instruct,'SPftn58sparse')
     ftn58sparse = instruct.SPftn58sparse;
 else
     ftn58sparse = instruct.Sftn58sparse;
+    ftn58sparse.dd = [ftn58sparse.dd,zeros(size(ftn58sparse.dd,1),1)];
 end
 load('slab_info.mat');
 

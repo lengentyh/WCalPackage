@@ -24,14 +24,3 @@ A sub-program to calculate unfolding band structure
 
 ## WilsonLoop
 New information
-
-## Kubo formula 
-This program calculate the conductivity through Kubo formula. The unit is chosen so that the value can be directly related to Chern number
-
-## semi-infiniteGreen
-This program also calculates renormalized suface state but can be generalize to lower dimension
-
-## BasisRotation
-This program rotates the non-hybridized spinless orbitals representing hopping parameters
-
-

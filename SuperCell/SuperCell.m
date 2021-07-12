@@ -37,6 +37,7 @@ elseif isfield(instruct,'SPftn58sparse')
     ftn58sparse = instruct.SPftn58sparse;
 else
     ftn58sparse = instruct.Sftn58sparse;
+    ftn58sparse.BR = Sftn58sparse.BR2D;
 end
 
 orbID = zeros(ftn58sparse.Nat,5);

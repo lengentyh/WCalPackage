@@ -227,8 +227,10 @@ for mm=1:length(ef)
            
         %%% Green't function (renomalization procedure)
         [Hs,Hb] = renormH(E,H,T,Ni);
-        Gb      = inv(E-Hb);
-		Gs      = inv(E-Hs);
+        %Gb      = inv(E-Hb);
+		%Gs      = inv(E-Hs);
+        Gb      = (E-Hb)\II;
+        Gs      = (E-Hs)\II;
         Abt(ik) = -imag(trace(Gb*PCD_exp));
         Ast(ik) = -imag(trace(Gs*PCD_exp));
         
@@ -240,7 +242,8 @@ for mm=1:length(ef)
             nH       = full(sparse(ii_b,jj_b,exp(1i*dd_b*kcolumnvec).*nH_tt,g_norb,g_norb)); 
             nH       = (nH+nH')/2;
             nHS      = T*Gs*T';
-		    GnH      = inv(E-nH-nHS);
+		    %GnH      = inv(E-nH-nHS);
+            GnH      = (E-nH-nHS)\II;
             A00t(ik) = -imag(trace(GnH));
             Sxt0(ik) = -imag(trace(Sx*GnH));
             Syt0(ik) = -imag(trace(Sy*GnH));
